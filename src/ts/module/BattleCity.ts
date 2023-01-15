@@ -11,23 +11,6 @@ type hitObj = {
 }
 
 // 坦克大战、类，所有类的父亲
-/*
-  思路：
-  1、创建地图
-    1.1、生成墙壁、障碍物等
-    1.2、碰撞检测、坦克是不能穿越障碍物
-    1.3、生成基地、基地被攻击则失败
-  2、生成主角
-    2.1、绑定键盘事件，将键盘的上下左右反映到主角上、进行移动
-    2.2、主角可以发射子弹
-      2.2.1、对子弹进行碰撞检测
-    2.3、主角可以被敌人子弹击败，被击败代表游戏失败
-  3、生成敌人
-    3.1、敌人可以移动
-    3.2、敌人可以发射子弹
-    3.3、敌人可以被主角击败
-*/
-
 const canvas = document.querySelector('canvas') as HTMLCanvasElement
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
@@ -127,7 +110,7 @@ export default class BattleCity {
 
   // 更新游戏状态的页面元素
   updateStatus() {
-    (<Element>document.querySelector('#myLife')).innerHTML = String(this.myTanke.tankObj.lifeVal);
+    (<Element>document.querySelector('#myLife')).innerHTML = String(this.myTanke?.tankObj.lifeVal);
     (<Element>document.querySelector('#enemyNum')).innerHTML = String(this.levelParams.enemyAmount - this.enemyVanishNum)
   }
 

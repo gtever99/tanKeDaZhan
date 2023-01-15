@@ -33,8 +33,8 @@ export default class Tank extends BattleCity{
     this.isInvincible = false
     this.lifeVal = lifeVal
 
-    // 坦克刚创建会有1.5秒无敌时间
-    this.invincible(1500)
+    // 坦克刚创建会有3秒无敌时间
+    this.invincible(3000)
   }
 
   // 开启无敌

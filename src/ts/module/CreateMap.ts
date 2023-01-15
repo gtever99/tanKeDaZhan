@@ -96,7 +96,7 @@ export default class CreateMap extends BattleCity{
     const { ctx } = this
     ctx.beginPath()
     ctx.strokeStyle = 'red'
-    ctx.font=`${w / 1.5}px Arial`;
+    ctx.font=`${parseInt(String((w / 1.5)))}px Arial`;
     ctx.fillText('家',x,y + h)
     ctx.closePath()
   }

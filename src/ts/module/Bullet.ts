@@ -209,8 +209,6 @@ export default class Bullet extends BattleCity{
     for (let i1 = 0; i1 <= 2; i1 ++) {
       for (let i2 = 0; i2 < count; i2++) {
         // 渲染出当前数据
-        // 下面是点数学题
-        // moveX，moveY是粒子开始的坐标，画个三角形，角度半径知道很容易就得出方程
         let angle = 360 / (count / i1) * i2;
         let radians = angle * Math.PI / 180;
         let moveX = x + Math.cos(radians) * radius / i1
