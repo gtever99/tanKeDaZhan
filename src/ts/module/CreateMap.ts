@@ -164,11 +164,11 @@ const mapObj = [
   },
   {
     enemySeed: 2.5,
-    enemyAmount: 50,
+    enemyAmount: 100,
     enemyCeiling: 20,
     enemyLife: 3,
     myTankLife: 5,
-    enemyCreateSeed: 1000,
+    enemyCreateSeed: 800,
     map: [
       '                                ',
       '                                ',
@@ -200,11 +200,11 @@ const mapObj = [
   },
   {
     enemySeed: 3,
-    enemyAmount: 100,
-    enemyCeiling: 40,
+    enemyAmount: 200,
+    enemyCeiling: 50,
     enemyLife: 4,
     myTankLife: 10,
-    enemyCreateSeed: 800,
+    enemyCreateSeed: 500,
     map: [
       '                                ',
       '                                ',
