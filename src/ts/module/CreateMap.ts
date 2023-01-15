@@ -199,12 +199,12 @@ const mapObj = [
     ]
   },
   {
-    enemySeed: 3,
+    enemySeed: 3.3,
     enemyAmount: 200,
     enemyCeiling: 50,
-    enemyLife: 4,
+    enemyLife: 5,
     myTankLife: 10,
-    enemyCreateSeed: 500,
+    enemyCreateSeed: 400,
     map: [
       '                                ',
       '                                ',
