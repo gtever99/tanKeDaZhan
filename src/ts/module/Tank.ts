@@ -54,10 +54,11 @@ export default class Tank extends BattleCity{
       const cw = canvas.width
       const ch = canvas.height
       const mapBottom = (ch - (tankH * devicePixelRatio)) / devicePixelRatio
+      const mapRight = (cw - (tankW * devicePixelRatio)) / devicePixelRatio
 
       // 移动
       if (tankX > 0) this.dir === '左' ? tankX -= this.seed : false
-      if (tankX + tankW < cw) this.dir === '右' ? tankX += this.seed : false
+      if (tankX < mapRight) this.dir === '右' ? tankX += this.seed : false
       if (tankY > 0) this.dir === '上' ? tankY -= this.seed : false
       if (tankY < mapBottom) this.dir === '下' ? tankY += this.seed : false
 
@@ -72,7 +73,7 @@ export default class Tank extends BattleCity{
       })
 
       // 撞到边界
-      if ((tankX <= 0 || tankX + tankW >= cw || tankY <= 0 || tankY >= mapBottom) && (this.color !== this.config.myTankColor)) reslove(null)
+      if ((tankX <= 0 || tankX >= mapRight || tankY <= 0 || tankY >= mapBottom) && (this.color !== this.config.myTankColor)) reslove(null)
       // 撞到墙了
       if (moveResult1) return reslove(null)
 
