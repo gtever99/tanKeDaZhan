@@ -98,7 +98,7 @@ export default class Controller{
   // 控制移动
   move = () => {
     // 防止多次执行
-    if (!this.isMove) {
+    if (!this.isMove && !this.Tank.isSuspend) {
       this.isMove = true
       this.moveHandle()
     }
@@ -106,17 +106,18 @@ export default class Controller{
 
   // 重绘
   redraw = () => {
-    const { ctx, canvas  } = this.Tank
-    // 清除
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    if (!this.Tank.isSuspend) {
+      const { ctx, canvas  } = this.Tank
+      // 清除
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    // 调用绘制方法
-    this.CreateMap.drawMap()
-    this.Enemy.move()
-    this.Bullet.move()
-    this.Enemy.draw()
-    this.Bullet.drawHitEffects()
-
+      // 调用绘制方法
+      this.CreateMap.drawMap()
+      this.Enemy.move()
+      this.Bullet.move()
+      this.Enemy.draw()
+      this.Bullet.drawHitEffects()
+    }
     window.requestAnimationFrame(this.redraw)
   }
 

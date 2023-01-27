@@ -20,9 +20,11 @@ export default class Enemy extends BattleCity{
     this.createEnemyId = setInterval(() => {
       // 限制地图上最大显示的敌人坦克数量
       // 并且限制 关卡敌人数量 - 消灭敌人数量
+      // 并且不在暂停状态下
       if (
         this.enemyAll.length <= this.levelParams.enemyCeiling &&
-        (this.levelParams.enemyAmount - this.enemyVanishNum) > this.enemyAll.length - 1
+        (this.levelParams.enemyAmount - this.enemyVanishNum) > this.enemyAll.length - 1 &&
+        !this.isSuspend
       ) this.createHandle()
     }, this.levelParams.enemyCreateSeed)
     this.move()
@@ -54,11 +56,15 @@ export default class Enemy extends BattleCity{
     const tankObj = new Tank(this.levelParams.enemySeed, 'e80000',this.levelParams.enemyLife, 100, 0, )
     // 发射子弹的定时器
     const bulletId = setInterval(() => {
-      this.enemyBullet(tankObj)
+      if (!this.isSuspend) {
+        this.enemyBullet(tankObj)
+      }
     }, (launchVal * 1000) / 1.5)
     // 转向的定时器
     const turnToId = setInterval(() => {
-      this.turnTo(tankObj)
+      if (!this.isSuspend) {
+        this.turnTo(tankObj)
+      }
     }, launchVal * 1000)
     // 创造敌人
     this.enemyAll.push({

@@ -50,6 +50,7 @@ export default class CreateMap extends BattleCity{
       v.type === 'q' ? this.drawWall(v.x, v.y, v.w, v.h, this.config.wallColor) : false
       v.type === 'j' ? this.drawFamily(v.x, v.y, v.w, v.h) : false
       v.type === 'z' ? this.drawBarrier(v.x, v.y, v.w, v.h) : false
+      v.type === 'h' ? this.drawSea(v.x, v.y, v.w, v.h) : false
     })
   }
 
@@ -91,6 +92,27 @@ export default class CreateMap extends BattleCity{
     }
   }
 
+  // 绘制海
+  drawSea(x: number, y: number, w: number, h: number) {
+    const { ctx } = this
+    ctx.beginPath()
+    ctx.save()
+    ctx.fillStyle = '#0022ff'
+    ctx.fillRect(x, y, w, h)
+    ctx.strokeStyle = "#a5a5a5"
+    ctx.moveTo(x + (w / 5), y + (h / 4))
+    ctx.lineTo(x + (w / 2.5), y + (h / 4))
+    ctx.moveTo(x + (w / 1.5), y + (h / 4))
+    ctx.lineTo(x + (w / 2), y + (h / 4))
+    ctx.moveTo(x + (w / 5), y + (h / 1.5))
+    ctx.lineTo(x + (w / 2), y + (h / 1.5))
+    ctx.moveTo(x + (w / 1.6), y + (h / 1.5))
+    ctx.lineTo(x + (w / 1.1), y + (h / 1.5))
+    ctx.stroke()
+    ctx.restore()
+    ctx.closePath()
+  }
+
   // 绘制家
   drawFamily(x: number, y: number, w: number, h: number) {
     const { ctx } = this
@@ -113,19 +135,20 @@ export default class CreateMap extends BattleCity{
   }
 }
 
-/*
-*   q = 墙
-*   j = 家
-*   z = 障碍
-*
+/**
+*  ---------地图位置----------
+*  @q = 墙
+*  @j = 家
+*  @z = 障碍
+*  -------关卡参数----------
+*  @enemySeed 敌人速度
+*  @enemyCeiling 敌人上限(地图最多可以出现多少敌人)
+*  @enemyAmount 敌人数量
+*  @enemyLife 敌人生命
+*  @myTankLife 主角生命
+*  @enemyCreateSeed 敌人创建速度(毫秒)
 * */
 const mapObj = [
-  // @enemySeed 敌人速度
-  // @enemyCeiling 敌人上限(地图最多可以出现多少敌人)
-  // @enemyAmount 敌人数量
-  // @enemyLife 敌人生命
-  // @myTankLife 主角生命
-  // @enemyCreateSeed 敌人创建速度(毫秒)
   {
     enemySeed: 2,
     enemyAmount: 10,
@@ -139,8 +162,8 @@ const mapObj = [
       '                                ',
       '                                ',
       '                                ',
-      '                                ',
-      '          q         q           ',
+      '   hhh                    hhh   ',
+      '   hhh    q         q     hhh   ',
       '         q q       q q          ',
       '        q   q     q   q         ',
       '       q     q   q     q        ',
@@ -180,10 +203,10 @@ const mapObj = [
       '     qqq  q          q  qqq     ',
       '     qqq  qqqqqqq    q  qqq     ',
       '     qqq  q          q  qqq     ',
-      '     qqq  q          q  qqq     ',
-      '     qqq  q    qqqqqqq  qqq     ',
-      '     qqq  q          q  qqq     ',
-      '     qqq  q          q  qqq     ',
+      '          q          q          ',
+      '    hhhh  q    qqqqqqq  hhhh    ',
+      '    hhhh  q          q  hhhh    ',
+      '          q           q         ',
       '     qqq  qqqqqqq    q  qqq     ',
       '     qqq  q          q  qqq     ',
       '     qqq  q          q  qqq     ',
@@ -199,12 +222,12 @@ const mapObj = [
     ]
   },
   {
-    enemySeed: 3.3,
+    enemySeed: 3,
     enemyAmount: 200,
     enemyCeiling: 50,
-    enemyLife: 5,
+    enemyLife: 4,
     myTankLife: 10,
-    enemyCreateSeed: 400,
+    enemyCreateSeed: 500,
     map: [
       '                                ',
       '                                ',
@@ -214,12 +237,12 @@ const mapObj = [
       '                                ',
       '    qqqqqqqqqqqqqqqqqqqqqqqqqqqq',
       '    qqqqqqqqqqqqqqqqqqqqqqqqqqqq',
-      '                                ',
-      '                                ',
-      'qqqqqqqqqqqqqqqqqqqqqqqqqqqq    ',
-      'qqqqqqqqqqqqqqqqqqqqqqqqqqqq    ',
-      '                                ',
-      '                                ',
+      '              hhh               ',
+      '              hhh               ',
+      'qqqqqqqqqqqqqqhhhqqqqqqqqqqq    ',
+      'qqqqqqqqqqqqqqhhhqqqqqqqqqqq    ',
+      '  hhh                      hhh  ',
+      '  hhh                      hhh  ',
       '   qqqqqqqqqqqqqqqqqqqqqqqqqqqqq',
       '   qqqqqqqqqqqqqqqqqqqqqqqqqqqqq',
       '                                ',

@@ -26,6 +26,7 @@ for (let i = 0; i < c.CreateMap.levelSum; i ++) {
 selectLevel.addEventListener('click', (e) => {
   // 获取索引
   const index = (e.target as HTMLDivElement).getAttribute('index') as string
+  if (!index) return
   // 设置选中样式
   divElAll.forEach(v => v.classList.remove('active'))
   divElAll[parseInt(index)]?.classList.add('active')
@@ -35,17 +36,12 @@ selectLevel.addEventListener('click', (e) => {
 
 // 说明弹框
 (document.querySelector('.explain') as HTMLDivElement).addEventListener('click', () => {
-  c.Bullet.dialog.alert( {
-    content: `
-      操作：↑↓←→<br>Space：发射子弹<br>点击选择关卡，每一关难度不同<br>
-      我设置了三个关卡<br>第一关：简单，第二关：困难，第三关：地狱<br>
-      胜利条件：消灭所有敌人<br>
-      失败条件：家全部被毁灭，或主角生命&lt;=0
-    `,
-    buttons: {
-      ok(){
-        return true;
-      },
-    }
-  })
+  c.Tank.suspend()
 })
+
+// 监听浏览器窗口隐藏
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    c.Tank.suspend()
+  }
+});

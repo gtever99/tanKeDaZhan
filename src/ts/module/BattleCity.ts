@@ -67,6 +67,8 @@ export default class BattleCity {
   static enemyVanishNum_: number = 0
   // 游戏是否结束
   static isFinish_: Boolean
+  // 游戏是否暂停
+  static isSuspend_: boolean = false
 
   constructor() {
     this.canvas = canvas
@@ -114,6 +116,30 @@ export default class BattleCity {
     (<Element>document.querySelector('#enemyNum')).innerHTML = String(this.levelParams.enemyAmount - this.enemyVanishNum)
   }
 
+  // 暂停事件
+  suspend() {
+    // 如果已经暂停不用重复暂停
+    if (this.isSuspend) return
+
+    // 暂停状态
+    this.isSuspend = true;
+    // 暂停方法
+    this.dialog.alert({
+      content: `
+      操作：↑↓←→<br>Space：发射子弹<br>点击选择关卡，每一关难度不同<br>
+      我设置了三个关卡<br>第一关：简单，第二关：困难，第三关：地狱<br>
+      胜利条件：消灭所有敌人<br>
+      失败条件：家全部被毁灭，或主角生命&lt;=0
+    `,
+      buttons: {
+        ok: () => {
+          this.isSuspend = false;
+          return true;
+        },
+      }
+    })
+  }
+
   // 地图对象
   get barrierObj() {
     return BattleCity.barrierObj_
@@ -141,6 +167,13 @@ export default class BattleCity {
   }
   set levelParams(val) {
     BattleCity.levelParams_ = val
+  }
+  // 游戏是否暂停
+  get isSuspend() {
+    return BattleCity.isSuspend_
+  }
+  set isSuspend(val) {
+    BattleCity.isSuspend_ = val
   }
   // 消灭敌人数量
   get enemyVanishNum() {

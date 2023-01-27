@@ -62,11 +62,11 @@ export default class Bullet extends BattleCity{
         // 子弹是否撞到墙
         let isHit = this.hitDetection(bulletHitObj, v2)
         // 撞上了就会删除这个子弹
-        if (isHit) isRemoveBullet = true
+        if (isHit && v2.type !== 'h') isRemoveBullet = true
 
         // 如果撞上了会返回一个false，本次循环会被过滤掉
         // 如果是障碍物不会删除
-        return v2.type === 'z' ? true : !isHit
+        return v2.type === 'z' || v2.type === 'h' ? true : !isHit
       })
 
       // 家没了
